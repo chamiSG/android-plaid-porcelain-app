@@ -1,0 +1,672 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".MainActivity"
+    tools:ignore="HardcodedText">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_silver"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <RelativeLayout
+                    android:id="@+id/headerLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/reports_header_bk"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="20dp">
+
+                    <RelativeLayout
+                        android:id="@+id/menu_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/menu_btn"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_alignParentRight="true"
+                            android:onClick="showPopup"
+                            android:src="@drawable/ic_more_vert_48" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/bg_logo"
+                        style="@style/reportContentText"
+                        android:layout_below="@id/menu_view"
+                        android:src="@drawable/icon_app"
+                        app:tint="@color/plaid_white" />
+
+                    <TextView
+                        style="@style/viewParent.headerText"
+                        android:layout_below="@id/bg_logo"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="70dp"
+                        android:text="@string/app_name"
+                        android:textColor="@color/plaid_white" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="140dp"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        app:cardBackgroundColor="@color/plaid_white"
+                        app:cardCornerRadius="8dp"
+                        app:cardUseCompatPadding="true"
+                        app:contentPadding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginTop="3sp"
+                                    android:layout_marginRight="5sp"
+                                    android:src="@drawable/heart"
+                                    app:tint="@color/colorpink" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/calibri"
+                                    android:text="Charity Setting"
+                                    android:textColor="#202022"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="8dp"
+                                android:fontFamily="@font/calibri"
+                                android:text="For every transaction donate:"
+                                android:textAlignment="center"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:weightSum="100">
+
+                                <RelativeLayout
+                                    android:id="@+id/spinnerLayout"
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginRight="3dp"
+                                    android:layout_weight="28"
+                                    android:gravity="center"
+                                    android:orientation="horizontal">
+
+                                    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                                        android:id="@+id/priceSpinner"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/calibri"
+                                        android:textColorHint="#05ab9a"
+                                        android:textStyle="bold"
+                                        app:met_floatingLabel="normal" />
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="8dp"
+                                android:fontFamily="@font/calibri"
+                                android:text="to following charity:"
+                                android:textAlignment="center"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+
+                            <RelativeLayout
+                                android:id="@+id/spinnerLayout_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginRight="3dp"
+                                android:layout_weight="90"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                                    android:id="@+id/charitySpinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/calibri"
+                                    android:textColorHint="#05ab9a"
+                                    android:textStyle="bold"
+                                    app:met_floatingLabel="normal" />
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        app:cardBackgroundColor="@color/plaid_white"
+                        app:cardCornerRadius="8dp"
+                        app:cardUseCompatPadding="true"
+                        app:contentPadding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginRight="5sp"
+                                    android:src="@drawable/dollar_img" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/calibri"
+                                    android:text="Donations"
+                                    android:textColor="#202022"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/transaction_value"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/calibri"
+                                    android:text="New Transactions: 0"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="5dp"
+                                android:orientation="horizontal"
+                                android:weightSum="100">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="8dp"
+                                    android:layout_weight="50"
+                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardCornerRadius="8dp"
+                                    app:cardUseCompatPadding="true"
+                                    app:contentPadding="14dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/calibri"
+                                            android:text="Pending Donation"
+                                            android:textAlignment="center"
+                                            android:textColor="#FFFFFF"
+                                            android:textSize="16sp" />
+
+                                        <ImageView
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
+                                            android:layout_gravity="center"
+                                            android:layout_marginTop="16dp"
+                                            android:layout_marginBottom="16dp"
+                                            android:src="@drawable/dollar_img" />
+
+                                        <TextView
+                                            android:id="@+id/pending_donate_value"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/calibri"
+                                            android:text="$0.00"
+                                            android:textAlignment="center"
+                                            android:textColor="#FFFFFF"
+                                            android:textSize="18sp"
+                                            android:textStyle="bold" />
+                                    </LinearLayout>
+
+                                </androidx.cardview.widget.CardView>
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_weight="50"
+                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardCornerRadius="8dp"
+                                    app:cardUseCompatPadding="true"
+                                    app:contentPadding="16dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/calibri"
+                                            android:text="@string/total_donated"
+                                            android:textAlignment="center"
+                                            android:textColor="#FFFFFF"
+                                            android:textSize="16sp" />
+
+                                        <ImageView
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
+                                            android:layout_gravity="center"
+                                            android:layout_marginTop="16dp"
+                                            android:layout_marginBottom="16dp"
+                                            android:src="@drawable/dollar_img" />
+
+                                        <TextView
+                                            android:id="@+id/total_donate_value"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/calibri"
+                                            android:text="$0.00"
+                                            android:textAlignment="center"
+                                            android:textColor="#FFFFFF"
+                                            android:textSize="18sp"
+                                            android:textStyle="bold" />
+
+                                    </LinearLayout>
+
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:fontFamily="@font/calibri"
+                                android:text="@string/donate_detail"
+                                android:textAlignment="center"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp"
+                        android:layout_marginBottom="24dp"
+                        app:cardBackgroundColor="@color/plaid_white"
+                        app:cardCornerRadius="8dp"
+                        app:cardUseCompatPadding="true"
+                        app:contentPadding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginRight="5sp"
+                                    android:src="@drawable/gift_img" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/calibri"
+                                    android:text="@string/rewards_title"
+                                    android:textColor="#202022"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:drawablePadding="10dp"
+                                    android:drawableBottom="@drawable/border_line"
+                                    android:fontFamily="@font/calibri"
+                                    android:text="@string/rewards_content"
+                                    android:textAlignment="center"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <ListView
+                                        android:id="@+id/item_list_view"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="wrap_content"
+                                        android:dividerHeight="1dp"
+                                        android:scrollbars="vertical"
+
+                                        android:smoothScrollbar="true"
+                                        android:padding="10dp" >
+                                    </ListView>
+
+                                    <TextView
+                                        android:id="@+id/empty"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerInParent="true"
+                                        android:layout_marginTop="20dp"
+                                        android:layout_marginBottom="20dp"
+                                        android:text="@string/empty_list_text" />
+
+                                </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        app:cardBackgroundColor="@color/plaid_white"
+                        app:cardCornerRadius="8dp"
+                        app:cardUseCompatPadding="true"
+                        app:contentPadding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:layout_marginRight="5sp"
+                                    android:src="@drawable/dollar_img" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/calibri"
+                                    android:text="Referral Program"
+                                    android:textColor="#202022"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/total_referrals_value"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/calibri"
+                                    android:text="Total Referrals: 0"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/filledTextField"
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp"
+                                    android:layout_weight="50"
+                                    android:hint="Earnings">
+
+                                    <!--this is the actual edit text which takes the input-->
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/edit_text"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        android:text="$0.00" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/filledTextField1"
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp"
+                                    android:layout_weight="50"
+                                    android:hint="Total Paid">
+
+                                    <!--this is the actual edit text which takes the input-->
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/edit_text1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingTop="10dp"
+                                        android:paddingBottom="10dp"
+                                        android:text="$0.00" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/calibri"
+                                    android:text="Stats update every 12 hours"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/calibri"
+                                    android:text="@string/referral_link"
+                                    android:textAlignment="center"
+                                    android:textColor="#202022"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                                <ImageButton
+                                    android:id="@+id/imageButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    app:srcCompat="@drawable/ic_baseline_content_copy_24" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:background="@drawable/copy_icon_bg">
+
+                                <TextView
+                                    android:id="@+id/cUrl"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="90"
+                                    android:fontFamily="@font/calibri"
+                                    android:paddingLeft="15dp"
+                                    android:text="@string/link"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                                <Button
+                                    android:id="@+id/copy_btn"
+                                    android:layout_width="15dp"
+                                    android:layout_height="25dp"
+                                    android:layout_weight="10"
+                                    android:layout_margin="5dp"
+                                    app:icon="@drawable/ic_baseline_content_copy_24"
+                                    android:paddingLeft="3dp"
+                                    android:paddingRight="3dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:background="@drawable/copy_icon">
+
+                                </Button>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="15dp">
+                                <Button
+                                    android:id="@+id/more_btn"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="90"
+                                    android:layout_marginRight="10dp"
+                                    android:textAllCaps="false"
+                                    android:text="@string/more_info"
+                                    app:backgroundTint="@color/colorAccent"
+                                    />
+
+                                <Button
+                                    android:id="@+id/withdraw_btn"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="10"
+                                    android:textAllCaps="false"
+                                    android:text="@string/withdraw"
+                                    />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Plaid Technologies, Inc. <support@plaid.com>
+  -->
+
+<resources>
+  <color name="colorPrimary">#db2c73</color>
+  <!--    <color name="colorPrimary">#673AB7</color>-->
+  <color name="colorPrimaryDark">#db2c73</color>
+  <color name="colorAccent">#2f2e2f</color>
+  <color name="coorPinkOveraly">#F8C4D9</color>
+  <color name="colorpink">#db2c73</color>
+  <color name="black_color">#000000</color>
+  <color name="light_silver">#E8E8E8</color>
+</resources>

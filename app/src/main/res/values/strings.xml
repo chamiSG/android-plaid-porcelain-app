@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Plaid Technologies, Inc. <support@plaid.com>
+  -->
+
+<resources>
+    <string name="app_name">PORCELAIN</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="title_text">PORCELAIN</string>
+    <string name="title_poilcy">porcelain.app</string>
+    <string name="content_term">Terms &amp; Conditions </string>
+    <string name="content_poilcy"> Privacy Policy</string>
+    <string name="channel_name">PORCELAIN</string>
+    <string name="channel_description">Terms &amp; Conditions  Privacy Policy</string>
+    <string name="confirm">OK</string>
+
+    <string name="title_activity_big_text_main">BigTextStyle Main Activity</string>
+    <string name="title_activity_big_picture_main">BigPictureStyle Main Activity</string>
+    <string name="title_activity_inbox_main">InboxStyle Main Activity</string>
+    <string name="title_activity_messaging_main">MessagingStyle Main Activity</string>
+
+    <string name="main_text_activity_big_text_main">
+        This Activity would handle the reminder app\'s functionality.
+        \n\nThe notification type for this example was the Big Text Style!
+    </string>
+    <string name="main_text_activity_big_picture_main">
+        This Activity would handle the social app\'s functionality for an individual post.
+        \n\nThe notification type for this example was the Big Picture Style!
+    </string>
+    <string name="main_text_activity_inbox_main">
+        This Activity would handle the email app\'s functionality for an email(s).
+        \n\nThe notification type for this example was the Inbox Style!
+    </string>
+    <string name="main_text_activity_messaging_main">
+        This Activity would handle the messaging app\'s functionality for a chat(s).
+        \n\nThe notification type for this example was the Messaging Style!
+    </string>
+    <string name="pending_donate">%s</string>
+    <string name="content_cancel">You left Link without completing the flow. Reason: %1$s</string>
+    <string name="content_exception">Exception Class:\n%1$s\n\n Exception Message:\n%2$s</string>
+    <string name="content_exit">
+        Uh-oh! It seems something went wrong:\n\"%1$s\"</string>
+    <string name="referral_link">Earn 40% recurring commission on fees with your referral link!</string>
+    <string name="link">http://porcelain.app/a237b</string>
+    <string name="more_info">More Info</string>
+    <string name="withdraw">Withdraw to Bank</string>
+    <string name="withdraw_required">A minimum of $10 is required to withdraw</string>
+    <string name="more_info_title_1">Referral Program Example:</string>
+    <string name="more_info_content_1">A friend installs Porcelain using your referral link and decides to donate $0.50 per transaction. For every transaction we will donate 70% to their desired charity($0.35) and collect 30% in operating fees ($0.15). Then you get 40% of the operating fee ($0.06) every time they use their credit card. there`s no limit to how much you can earn!</string>
+    <string name="more_info_title_2">Possible Earnings:</string>
+    <string name="more_info_content_2">50 referrals:</string>
+    <string name="more_info_content_3">$0.50 donation per transaction, each making 3 transactions per day.</string>
+    <string name="more_info_content_4">$0.06*3*50 = $9.00 per day</string>
+    <string name="more_info_content_5">100 referrals:</string>
+    <string name="more_info_content_6">$0.06*3*100 = $18.00 per day</string>
+    <string name="more_info_content_7">1000 referrals:</string>
+    <string name="more_info_content_8">$0.06*3*1000 = $180.00 per day</string>
+    <string name="welcome_title">Welcome to Porcelain!</string>
+    <string name="welcome_content">This is your dashboard. From here you can manage your charity settings, claim rewards, veiw donations, and access our referral program.</string>
+    <string name="ok">Okay</string>
+    <string name="empty_list_text">No Items</string>
+    <string name="claim">Claim</string>
+    <string name="rewards_title">Rewards</string>
+    <string name="rewards_content">Reach donation milestones and unlock amazing rewards. Enjoy free shipping on all items!</string>
+    <string name="donate_detail">Once you reach the $5 threshold your pending donation will automatically be processed. Please allow 24 hours to receive confirmation email.</string>
+    <string name="total_donated">Total Donated</string>
+    <string name="claim_content">You must have $15 in total donations to unlock the item.</string>
+    <string name="connect_bank_button">Connect Bank Account</string>
+    <string name="terms_content">Start eaming rewards and improving the world with every transaction!</string>
+    <string name="terms_checkbox">I have read and agree to the terms and conditions</string>
+
+    <string-array name="charity">
+        <item>United Way Worldwide</item>
+        <item>American Heart Association</item>
+        <item>ASPCA</item>
+        <item>Salvation Army</item>
+        <item>Direct Relief</item>
+        <item>Goodwill Industries International</item>
+        <item>Task Force for Global Health</item>
+        <item>Food for the Poor</item>
+        <item>Red Cross</item>
+        <item>Mount Sinai Health System</item>
+        <item>Habitat for Humanity</item>
+        <item>American Cancer Society</item>
+    </string-array>
+
+    <string-array name="donate_price">
+        <item>$0.50</item>
+        <item>$0.75</item>
+        <item>$1.00</item>
+    </string-array>
+</resources>
