@@ -53,6 +53,17 @@
             android:textColor="#ffffff"
             android:textSize="20sp" />
 
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spin_kit_signin"
+            style="@style/SpinKitView.Circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/link_porcelain"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="30dp"
+            app:SpinKit_Color="@color/plaid_white" />
+
         <TextView
             android:id="@+id/link_porcelain"
             android:layout_width="wrap_content"

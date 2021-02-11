@@ -7,7 +7,7 @@ import java.text.NumberFormat;
 
 public class Global {
 
-    public static final String BASE_URL = "http://198.12.255.51:80";
+    public static final String BASE_URL = "http://198.12.255.51:3000";
 
     public static double stringToPrice(String str) {
         double price;

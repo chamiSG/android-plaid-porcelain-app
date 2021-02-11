@@ -1,5 +1,6 @@
 package com.plaid.platform.porcelain.network
 
+import com.plaid.platform.porcelain.Global
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
@@ -10,8 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object LinkTokenRequester {
   // This value is setup to work with emulators. Modify this value to your PC's IP address if not.
 //  private val baseUrl = " http://ec2-54-234-223-5.compute-1.amazonaws.com:80";
-  private val baseUrl = "http://198.12.255.51:80/";
-//  public   val baseUrl = "http://192.168.18.148:3000/";
+  private val baseUrl = Global.BASE_URL;
 
   private val retrofit: Retrofit = Retrofit.Builder()
     .baseUrl(baseUrl)

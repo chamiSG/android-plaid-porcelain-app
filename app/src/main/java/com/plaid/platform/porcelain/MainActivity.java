@@ -102,15 +102,10 @@ public class MainActivity<pubilc> extends AppCompatActivity {
 
     private PrefManager prefManager;
     private DBManager dbManager;
-    private ListView itemListView;
-    private ItemAdapter itemAdapter;
     private Cursor cursor;
     private SQLiteDatabase database;
     private Context mContext;
     ArrayList<Items> itemList = new ArrayList<Items>();
-    private String name;
-    private String type;
-    private byte[] image;
     private String donate;
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -625,10 +620,10 @@ public class MainActivity<pubilc> extends AppCompatActivity {
         insertItemImageFromAssets("Hydroponic Smart Garden", "Smart Garden", "Hydroponic Smart Garden.jpg");
         insertItemImageFromAssets("Wireless Earbuds (Android and iOS)", "Wireless Device", "Wireless Earbuds (Android and iOS).jpg");
 
-        itemListView = findViewById(R.id.item_list_view);
+        ListView itemListView = findViewById(R.id.item_list_view);
         itemListView.setEmptyView(findViewById(R.id.empty));
         itemList = new ArrayList<>();
-        itemAdapter = new ItemAdapter(this, R.layout.activity_item_view_record, itemList);
+        ItemAdapter itemAdapter = new ItemAdapter(this, R.layout.activity_item_view_record, itemList);
         itemListView.setAdapter(itemAdapter);
         itemListView.setOnTouchListener(new ListView.OnTouchListener() {
             @Override
@@ -656,11 +651,11 @@ public class MainActivity<pubilc> extends AppCompatActivity {
         itemList.clear();
         while(data.moveToNext()) {
 
-            name = data.getString(2);
-            type = data.getString(3);
-            image = data.getBlob(1);
+            String name = data.getString(2);
+            String type = data.getString(3);
+            byte[] image = data.getBlob(1);
 
-            itemList.add(new Items( name, type, image));
+            itemList.add(new Items(name, type, image));
         }
         data.close(); //<<<<<<<<<< SHOULD ALWAYS CLOSE CURSOR WHEN DONE WITH IT
         itemAdapter.notifyDataSetChanged();
