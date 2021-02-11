@@ -36,6 +36,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
@@ -56,6 +57,11 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.plaid.link.Plaid;
 import com.plaid.link.configuration.LinkTokenConfiguration;
@@ -94,34 +100,6 @@ public class MainActivity<pubilc> extends AppCompatActivity {
     private ClipboardManager clipboardManager;
     private ClipData clipData;
 
-    @SuppressLint("StringFormatMatches")
-    private final LinkResultHandler myPlaidResultHandler = new LinkResultHandler(
-
-            linkSuccess -> {
-                startWelcome();
-                transactionData();
-                sharedPreferences.edit().putString("accountid", linkSuccess.getMetadata().getAccounts().get(0).getId()).apply();
-                sharedPreferences.edit().putString("publictoken",linkSuccess.getPublicToken()).apply();
-//                linkSuccess.getMetadata().getAccounts().
-                return Unit.INSTANCE;
-            },
-            linkExit -> {
-                tokenResult.setText("");
-                if (linkExit.getError() != null) {
-                    result.setText(getString(
-                            R.string.content_exit,
-                            linkExit.getError().getDisplayMessage(),
-                            linkExit.getError().getErrorCode()));
-                } else {
-                    result.setText(getString(
-                            R.string.content_cancel,
-                            linkExit.getMetadata().getStatus() != null ? linkExit.getMetadata()
-                                    .getStatus()
-                                    .getJsonValue() : "unknown"));
-                }
-                return Unit.INSTANCE;
-            }
-    );
     private PrefManager prefManager;
     private DBManager dbManager;
     private ListView itemListView;
@@ -133,9 +111,8 @@ public class MainActivity<pubilc> extends AppCompatActivity {
     private String name;
     private String type;
     private byte[] image;
-    private String donateValue;
     private String donate;
-
+    private GoogleSignInClient mGoogleSignInClient;
 
     @SuppressLint({"ClickableViewAccessibility", "SetTextI18n", "CutPasteId"})
     @Override
@@ -245,14 +222,12 @@ public class MainActivity<pubilc> extends AppCompatActivity {
             charityMaterialSpinner.setText(getCharity);
             mPendingDonate.setText("$" + Global.decimalConvert(getPendingDonate));
             mTotalDonate.setText("$" + Global.decimalConvert(getTotalDonate));
-//
-//            if( getDonate != 0.00){
-//
-//            }
         }
         data.close();
 
-        if(!prefManager.isFirstTimeLogin()){
+        prefManager.setFirstTimeLogin(false);
+
+        if(!prefManager.isFirstTimeBank()){
             transactionData();
         }
 
@@ -301,7 +276,42 @@ public class MainActivity<pubilc> extends AppCompatActivity {
                 alert.show();
             }
         });
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
+
+    @SuppressLint("StringFormatMatches")
+    private final LinkResultHandler myPlaidResultHandler = new LinkResultHandler(
+
+            linkSuccess -> {
+                prefManager.setFirstTimeBank(false);
+                startWelcome();
+                transactionData();
+                sharedPreferences.edit().putString("accountid", linkSuccess.getMetadata().getAccounts().get(0).getId()).apply();
+                sharedPreferences.edit().putString("publictoken",linkSuccess.getPublicToken()).apply();
+//                linkSuccess.getMetadata().getAccounts().
+                return Unit.INSTANCE;
+            },
+            linkExit -> {
+                tokenResult.setText("");
+                if (linkExit.getError() != null) {
+                    result.setText(getString(
+                            R.string.content_exit,
+                            linkExit.getError().getDisplayMessage(),
+                            linkExit.getError().getErrorCode()));
+                } else {
+                    result.setText(getString(
+                            R.string.content_cancel,
+                            linkExit.getMetadata().getStatus() != null ? linkExit.getMetadata()
+                                    .getStatus()
+                                    .getJsonValue() : "unknown"));
+                }
+                return Unit.INSTANCE;
+            }
+    );
 
     public void insertItemImageFromAssets(String item_name, String item_type, String image_name)  {
         DatabaseHelper dbHelper = new DatabaseHelper(getApplicationContext());
@@ -399,16 +409,16 @@ public class MainActivity<pubilc> extends AppCompatActivity {
         CheckBox mAgreeCheck = (CheckBox) customLayout.findViewById(R.id.terms_checkBox);
         Button connectBtn = customLayout.findViewById(R.id.connect_btn);
         connectBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                @Override
+                public void onClick(View v) {
 
-            if (mAgreeCheck.isChecked()){
-                setOptionalEventListener();
-                openLink();
-                termsAlert.dismiss();
-            }else{
-                Toast.makeText(MainActivity.this, "Read and agree to the terms and conditions", Toast.LENGTH_LONG).show();
-            }
+                if (mAgreeCheck.isChecked()){
+                    setOptionalEventListener();
+                    openLink();
+                    termsAlert.dismiss();
+                }else{
+                    Toast.makeText(MainActivity.this, "Read and agree to the terms and conditions", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -440,7 +450,7 @@ public class MainActivity<pubilc> extends AppCompatActivity {
             startWelcomeDialog();
         }
     }
-    // Get All and nae transactions
+    // Get All and new transactions
     private void transactionData(){
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = Global.BASE_URL + "/api/transactions";
@@ -683,7 +693,7 @@ public class MainActivity<pubilc> extends AppCompatActivity {
                         break;
 
                     case R.id.menuLogout:
-//                        Toast.makeText(this, "You clicked logout", Toast.LENGTH_SHORT).show();
+                        signOut();
                         break;
                     default:
                         return false;
@@ -692,6 +702,17 @@ public class MainActivity<pubilc> extends AppCompatActivity {
             }
         });
         popup.show();
+    }
+
+    private void signOut(){
+        mGoogleSignInClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+                startActivity(intent);
+                prefManager.setFirstTimeLogin(true);
+            }
+        });
     }
 
     private void generateBigPictureStyleNotification(String charity) {
@@ -814,7 +835,7 @@ public class MainActivity<pubilc> extends AppCompatActivity {
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setMessage("Do you want to Sign Out?");
+        builder.setMessage("Do you want to finish?");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

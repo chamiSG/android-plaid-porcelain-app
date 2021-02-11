@@ -71,10 +71,8 @@ public class SignInActivity extends AppCompatActivity {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
             if (account.getDisplayName() != null) {
-                prefManager = new PrefManager(getApplicationContext());
-                prefManager.setFirstTimeLogin(false);
                 Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                intent.putExtra("Name", account.getDisplayName());
+//                intent.putExtra("Name", account.getDisplayName());
                 startActivity(intent);
             }
         }
@@ -109,7 +107,7 @@ public class SignInActivity extends AppCompatActivity {
             assert account != null;
             Log.w("TAG", account.getDisplayName()+ account.getEmail());
             Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-            intent.putExtra("Name", account.getDisplayName());
+//            intent.putExtra("Name", account.getDisplayName());
             startActivity(intent);
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.

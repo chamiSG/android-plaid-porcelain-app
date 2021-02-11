@@ -88,10 +88,10 @@ public class BroadcastService extends Service {
                 @Override
                 public void run() {
                     transactionData();
-                    handler.postDelayed(this,1000*60);
+                    handler.postDelayed(this,1000*60*10);
 
                 }
-            }, 1000*60);
+            }, 1000*60*10);
 
         }
 
