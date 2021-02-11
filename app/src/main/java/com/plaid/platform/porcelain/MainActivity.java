@@ -149,19 +149,19 @@ public class MainActivity<pubilc> extends AppCompatActivity {
         prefManager = new PrefManager(this);
         if (prefManager.isFirstTimeLaunch()) {
             dbManager.defaultDonateInsert(0.50, "United Way Worldwide", 0, 0, 0);
-        }
 
-        String moreString;
-        if (savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                moreString= null;
-                startTermsDialog();
+            String moreString;
+            if (savedInstanceState == null) {
+                Bundle extras = getIntent().getExtras();
+                if(extras == null) {
+                    moreString= null;
+                    startTermsDialog();
+                } else {
+                    moreString= extras.getString("MORE_INFO");
+                }
             } else {
-                moreString= extras.getString("MORE_INFO");
+                moreString= (String) savedInstanceState.getSerializable("MORE_INFO");
             }
-        } else {
-            moreString= (String) savedInstanceState.getSerializable("MORE_INFO");
         }
 
         sharedPreferences=getSharedPreferences("accountdata",MODE_PRIVATE);
@@ -379,7 +379,7 @@ public class MainActivity<pubilc> extends AppCompatActivity {
     }
 
     // Terms and Conditions Dialog
-    @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint({"SetJavaScriptEnabled", "ClickableViewAccessibility"})
     private void startTermsDialog(){
 //        prefManager.setFirstTimeLaunch(false);
 
@@ -389,14 +389,18 @@ public class MainActivity<pubilc> extends AppCompatActivity {
         builder.setCancelable(false);
         WebView webView = (WebView) customLayout.findViewById(R.id.terms_web);
         webView.setVerticalScrollBarEnabled(true);
-        webView.setHorizontalScrollBarEnabled(true);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webSettings.setUseWideViewPort(true);
-        webSettings.setBuiltInZoomControls(true);
         webView.clearCache(true);
-        webView.loadUrl("file:///android_asset/terms.html");
-
+        webView.loadUrl("https://app.termly.io/document/terms-of-use-for-website/1b2cf18e-7e5c-4985-9b1d-cf4d1efaeb6b");
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                Log.v("here","here");
+                view.scrollBy(0, view.getContentHeight());
+            }
+        });
         AlertDialog termsAlert=builder.create();
         termsAlert.show();
 
