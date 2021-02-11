@@ -189,19 +189,16 @@ public class MainActivity<pubilc> extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 String optionSelected = s.toString();
-                Log.i("beforeTextChanged", optionSelected);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String optionSelected = s.toString();
-                Log.i("onTextChanged", optionSelected);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 priceValue = priceMaterialSpinner.getText().toString();
-                Log.i("afterTextChanged", priceValue);
                 double cDonate = Global.stringToPrice(priceValue);
                 donate = Global.decimalConvert(cDonate);
                 int t = dbManager.donateUpdate(Double.parseDouble(donate));
@@ -220,21 +217,17 @@ public class MainActivity<pubilc> extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 String optionSelected = s.toString().toLowerCase();
-                Log.i("beforeTextChanged", optionSelected);
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String optionSelected = s.toString().toLowerCase();
-                Log.i("onTextChanged", optionSelected);
             }
 
             @Override
             public void afterTextChanged(Editable s) {
                 charityValue = charityMaterialSpinner.getText().toString();
                 int t = dbManager.charityUpdate(charityValue);
-                Log.i("afterTextChanged", charityValue);
-//                charitySave();
             }
         });
 
@@ -247,10 +240,6 @@ public class MainActivity<pubilc> extends AppCompatActivity {
             double getPendingDonate = data.getDouble(3);
             double getTotalDonate = data.getDouble(4);
             double getTotalTransaction = data.getDouble(5);
-            Log.e("getPendingDonate", String.valueOf(getPendingDonate));
-            Log.e("getTotalDonate", String.valueOf(getTotalDonate));
-            Log.e("getDonate", String.valueOf(getDonate));
-            Log.e("getCharity", getCharity);
 
             priceMaterialSpinner.setText("$" + Global.decimalConvert(getDonate));
             charityMaterialSpinner.setText(getCharity);
@@ -262,6 +251,10 @@ public class MainActivity<pubilc> extends AppCompatActivity {
 //            }
         }
         data.close();
+
+        if(!prefManager.isFirstTimeLogin()){
+            transactionData();
+        }
 
         //Copy URL Clipboard
         Button btncpy = findViewById(R.id.copy_btn);
@@ -336,7 +329,6 @@ public class MainActivity<pubilc> extends AppCompatActivity {
 
     private void setOptionalEventListener() {
         Plaid.setLinkEventListener(linkEvent -> {
-            Log.i("Event", linkEvent.toString());
             return Unit.INSTANCE;
         });
     }
@@ -659,9 +651,6 @@ public class MainActivity<pubilc> extends AppCompatActivity {
             image = data.getBlob(1);
 
             itemList.add(new Items( name, type, image));
-            Log.i("image",String.valueOf(image));
-            Log.i("name",String.valueOf(name));
-            Log.i("type",String.valueOf(type));
         }
         data.close(); //<<<<<<<<<< SHOULD ALWAYS CLOSE CURSOR WHEN DONE WITH IT
         itemAdapter.notifyDataSetChanged();

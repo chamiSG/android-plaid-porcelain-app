@@ -69,7 +69,6 @@ public class BroadcastService extends Service {
         public void onCreate() {
             super.onCreate();
 
-            Log.i(TAG, "Starting timer...");
             Handler handler=new Handler();
 
             dbManager = new DBManager(this);
@@ -82,10 +81,6 @@ public class BroadcastService extends Service {
                 String getCharity = data.getString(2);
                 double getPendingDonate = data.getDouble(3);
                 double getTotalDonate = data.getDouble(4);
-                Log.e("getPendingDonate", String.valueOf(getPendingDonate));
-                Log.e("getTotalDonate", String.valueOf(getTotalDonate));
-                Log.e("getDonate", String.valueOf(getDonate));
-                Log.e("getCharity", getCharity);
             }
             data.close();
 
@@ -103,7 +98,6 @@ public class BroadcastService extends Service {
         @Override
         public void onDestroy() {
 
-            Log.i(TAG, "Timer cancelled");
             super.onDestroy();
         }
 
@@ -223,7 +217,6 @@ public class BroadcastService extends Service {
 
                             JSONObject transactionJson = new JSONObject(response);
 
-                            Log.d("newTransCnt:" , transactionJson.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -267,7 +260,6 @@ public class BroadcastService extends Service {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void generateBigPictureStyleNotification(String charity) {
 
-        Log.d("TAG", "generateBigPictureStyleNotification()");
         // 0. Get your data (everything unique per Notification).
         MockDatabase.BigPictureStyleSocialAppData bigPictureStyleSocialAppData =
                 MockDatabase.getBigPictureStyleData();
@@ -309,12 +301,6 @@ public class BroadcastService extends Service {
 
         // Create the RemoteInput.
         String replyLabel = getString(R.string.confirm);
-//        RemoteInput remoteInput =
-//                new RemoteInput.Builder(BigPictureSocialIntentService.EXTRA_COMMENT)
-//                        .setLabel(replyLabel)
-//                        // List of quick response choices for any wearables paired with the phone
-//                        .setChoices(bigPictureStyleSocialAppData.getPossiblePostResponses())
-//                        .build();
 
         PendingIntent replyActionPendingIntent;
 

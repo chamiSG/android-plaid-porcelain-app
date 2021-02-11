@@ -28,7 +28,7 @@
 
         <!-- `usesCleartextTraffic` is only to allow http traffic to localhost. Do not use this for production apps. -->
         <activity
-            android:name=".SignInActivity"
+            android:name=".SplashActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -41,13 +41,15 @@
             </intent-filter>
         </activity>
 
-<!--        <activity-->
-<!--            android:name=".Main2Activity"-->
-<!--            android:configChanges="orientation|screenSize"-->
-<!--            android:label=""-->
-<!--            android:screenOrientation="portrait"-->
-<!--            android:theme="@style/AppTheme.NoActionBar"-->
-<!--            android:windowSoftInputMode="stateHidden|adjustPan" />-->
+        <activity
+            android:name=".SignInActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.signIn"
+            android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
+
         <activity android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
